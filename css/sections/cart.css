@@ -1,0 +1,395 @@
+.drop__container {
+    display: flex;
+    border-bottom: 1px solid rgba(0,0,0, 0.2);
+}
+
+.dropbtn {
+    position: relative;
+    background-color: transparent;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    /* background-color: #2980B9; */
+}
+
+.header__arrow {
+    position: absolute;
+    top: 27px;
+    left: -27px;
+    padding: 10px;
+}
+
+.rotate {
+    -moz-transition: all 2s linear;
+    -webkit-transition: all 2s linear;
+    transition: all 2s linear;
+}
+  
+.rotated {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.dropdown {
+    min-width: 100%;
+    position: relative;
+    display: inline-block;
+    /* border-bottom: 1px solid rgba(0,0,0, 0.2); */
+}
+
+.dropdown-content {
+    display: none;
+    min-width: 100%;
+    overflow: auto;
+    z-index: 1;
+    padding-right: 32px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.show {display: block;}
+
+.hide {display: none;}
+
+.overview__container {
+    min-width: 100%;
+}
+
+.items__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checkAll__container {
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    margin-bottom: 17px;
+}
+
+.checkAll__label {
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 24px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.item__container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 12px;
+    display: flex;
+    align-items: start;
+    margin-top: 15px;
+}
+ 
+.icons__hover__container {
+    /* width: 100px; */
+    height: 20px;
+}
+
+.item__container:hover  .qty__item__icons{
+   display: flex; 
+}
+
+
+.item__description {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+}
+
+.item__image {
+    margin-right: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item__name {
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 24px;
+    font-size: 16px;
+    margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.item__additional {
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+.gray {
+    color: #A0A0A4;
+}
+
+.item__col__size {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.item__seller__info {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.check__itemImg {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item__qty__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    gap: 8px;
+}
+
+.no__margin {
+    margin: 0;
+}
+
+.qty__item__icons {
+    display: none;
+    margin-top: 4px;
+    gap: 18px;
+    flex: 1;
+    align-items: end;
+    justify-content: end;
+    width: 100px;
+    height: 20px;
+}
+
+.item__counter__container {
+    width: 80px;
+    height: 44px;
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.item__price__container {
+    width: 114px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.item__price__container__mobile {
+    width: fit-content;
+    display: none;
+    flex-direction: row;
+    align-items: end;
+}
+
+.increment__btn {
+    margin-left: auto;
+    background: none; 
+    border: none;  
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Segoe UI';
+    line-height: 24px;
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.decrement__btn {
+    margin-right: auto;
+    background: none; 
+    border: none;  
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Segoe UI';
+    font-size: 20px;
+    margin-bottom: 2px;
+    line-height: 24px;
+}
+
+.item__remained {
+    color: #FF3B30;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+.lined__price {
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
+    text-decoration: line-through;
+    color:  #A0A0A4;
+    line-height: 16px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.item__qty__number {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.cart__bucket__button {
+    height: 20px;
+    width: 20px;
+    /* min-width: 20px; */
+    border: none;  
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    background: url("../../assets/general/buck_black.svg") no-repeat;
+}
+
+.cart__bucket__button:hover {
+    background: url("../../assets/general/icon-20 (3) copy.svg") no-repeat;
+}
+
+.cart__heart__button {
+    height: 20px;
+    width: 20px;
+    border: none;  
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    background: url("../../assets/general/heart.svg") no-repeat;
+}
+
+.cart__heart__button:hover {
+    background: url("../../assets/general/heart_hover.svg") no-repeat;
+}
+
+.currency__string {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.check__itemImg__mobile {
+    display: none;
+    position: relative;
+}
+
+.item__block {
+    display: flex;
+    gap: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+    .dropdown {
+    }
+    .drop__container {
+        margin: 0px 16px;
+        padding-bottom: 0px;
+        border-bottom: none;
+    }
+    .dropdown-content {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-bottom: 30px;
+        min-width: 0;
+        padding-right: 0px;
+    }
+    .checkAll__container {
+        margin-top: 15px;
+        margin-bottom: 0px;
+    }
+    .header__arrow {
+        top: 15px;
+        left: -32px;
+    }
+    .item__name {
+        font-family: 'Segoe UI';
+        font-weight: 400;
+        line-height: 20px;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+    .icons__hover__container {
+        height: 24px;
+        margin-left: auto;
+    }
+    .check__itemImg {
+        display: none;
+    }
+    .check__itemImg__mobile {
+        display: block;
+    }
+    .item__price__container {
+        display: none;
+    }
+    .item__price__container__mobile {
+        display: flex;
+    }
+    .item__seller__info {
+        display: none;
+    }
+    .item__qty__container {
+        flex-direction: row;
+        margin-left: 0px;
+        margin-top: 12px;
+        align-items: center;
+        gap: 16px;
+        width: calc(100% - 14px);
+    }
+    .item__description {
+        max-width: fit-content;
+        margin-top: 5px;
+    }
+    .item__container {
+        flex-direction: column;
+        border-top: 1px solid rgba(0,0,0, 0.2);
+        padding-top: 12px;
+        gap: 0px;
+
+    }
+    .item__counter__container {
+        width: 60px;
+        height: 32px;
+    }
+    .item__qty__number {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .qty__item__icons {
+        width: fit-content;
+        gap: 22px;
+        margin-top: 2px;
+    }
+}
+

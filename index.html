@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Vite App</title>
+    <!-- <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="validation.js"></script>
+    <script type="text/javascript" src="modals.js"></script> -->
+    <script type="module" src="main.js"></script>
+    <script type="module" src="data.js"></script>
+    <script type="module" src="validation.js"></script>
+    <script type="module" src="modals.js"></script>
+  </head>
+  <body>
+    <!-- шапка -->
+    <header>
+      <nav class="header__nav">
+        <div class="header__logo">
+          <div class="header__hamburger">
+            <img src="assets/header/Frame 10692459.svg" alt="">
+          </div>
+          <h4 class="header__name">ТОВАРЫ <br /> И ТОЧКА</h4>
+        </div>
+
+        <div class="header__logo__mobile">
+          <div class="header__hamburger__mobile">
+            <img src="assets/mobile/icon-28.svg" alt="">
+          </div>
+          <h4 class="header__name__mobile">ТОВАРЫ И ТОЧКА</h4>
+          <div class="header__hamburger__mobile__search">
+            <img src="assets/mobile/icon-28 (1).svg" alt="">
+          </div>
+        </div>
+
+        <!-- поиск -->
+        <form class="search__input">
+          <input 
+          class="input__field"
+          type="text" 
+          placeholder="Я ищу...">
+          <button 
+          class="submit__btn"
+          type="submit">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.93382 1.70286C5.44752 1.70286 2.62132 4.52907 2.62132 8.01536C2.62132 11.5017 5.44752 14.3279 8.93382 14.3279C12.4201 14.3279 15.2463 11.5017 15.2463 8.01536C15.2463 4.52907 12.4201 1.70286 8.93382 1.70286ZM0.937988 8.01536C0.937988 3.59939 4.51784 0.0195312 8.93382 0.0195312C13.3498 0.0195313 16.9296 3.59939 16.9296 8.01536C16.9296 12.4313 13.3498 16.0112 8.93382 16.0112C4.51784 16.0112 0.937988 12.4313 0.937988 8.01536Z" fill="currentColor"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9602 12.8988C13.2846 12.5659 13.8175 12.559 14.1504 12.8834L20.1959 18.7751C20.5288 19.0995 20.5357 19.6324 20.2112 19.9653C19.8868 20.2982 19.3539 20.3051 19.021 19.9806L12.9756 14.089C12.6427 13.7645 12.6358 13.2317 12.9602 12.8988Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- профиль -->
+        <div class="profile__container">
+          <div class="icon__container">
+            <img 
+            style="position: absolute; bottom: 3px; left: -15px;"
+            src="assets/header/Profile_icon.svg" alt="">
+          </div>
+          <span class="icon__text">Профиль</span>
+        </div>
+
+        <div class="cart__container">
+          <div class="icon__container">
+            <img  
+            style="position: absolute; bottom: 6px; left: 0px;"
+            src="assets/header/Vector.svg" alt="">
+            <div class="cart__count__container" id="cart__pos__count">
+              0
+            </div>
+          </div>
+          <span class="icon__text">Корзина</span>
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- тело -->
+    <div class="main__container">
+      <div class="bucket__container">
+        
+        <!-- корзина -->
+        <div class="overview__container">
+          <p class="cart__header">Корзина</p>
+
+          <!-- присутствуют -->
+          <div class="dropdown">
+            <div name="drop__underline" class="drop__container">
+              <div class="checkAll__container">
+                <input onclick="toggleCheckboxes('item__checkbox')" class="checkbox" type="checkbox" id="main__checkbox" />
+                <label class="checkAll__label">
+                  Выбрать все
+                </label>
+              </div>
+              <button type="button" onclick="toggleDropdown(event)" class="dropbtn">
+                <img id="rotate" class="header__arrow" src="assets/cart_view/Vector (5).svg" alt="">
+              </button>
+            </div>
+          </div>
+
+          <div id="myDropdown" class="dropdown-content">
+            <ul class="items__list" id="items__list">
+            </ul>
+          </div>
+
+          <!-- отсутствуют -->
+          <div class="dropdown">
+            <div name="drop__underline" class="drop__container">
+              <div class="checkAll__container">
+                <label class="checkAll__label semibold">
+                  Отсутствуют · 3 товара
+                </label>
+              </div>
+              <button type="button" onclick="toggleDropdownNotAvaliable(event)" class="dropbtn">
+                <img id="rotate1" class="header__arrow" src="assets/cart_view/Vector (5).svg" alt="">
+              </button>
+            </div>
+          </div>
+
+          <div id="myUnavaliable" class="dropdown-content">
+            <ul class="items__list" id="unavaliable__list">
+            </ul>
+          </div>
+
+          <!-- способ доставки -->
+          <div class="white__container">
+            <div class="white__contentBox">
+              <div class="white__headerBox">
+                <span class="header">Cпособ доставки</span>
+                <button 
+                onclick="toggleAddressesModal(event)"
+                class="text__button"> 
+                  <span class="edit__link">Изменить</span>
+                </button>
+              </div>
+
+              <!-- модал c адресами -->
+              <div id="addresses__Modal" class="modal">
+                <div class="modal-content modal__w500">
+
+                  <div class="white__headerBox">
+                    <span class="modal__header">Способ доставки</span> 
+                    <button 
+                    onclick="closeModal('addresses__Modal')"
+                    class="modal__close"> 
+                      <img src="/assets/cart_view/Union.svg" alt="">
+                    </button>
+                  </div>
+                  <div class="addresses__type">
+                    <button 
+                    onclick="togglePickupPoint(event)"
+                    class="addresses__button" 
+                    id="pickup__button">
+                      В пункт выдачи
+                    </button>
+                    <button 
+                    onclick="toggleAdderess(event)"
+                    class="addresses__button" 
+                    id="courier__button">
+                      Курьером
+                    </button>
+                  </div>
+
+                  <form id="to__pickup__point" class="pickup__form" action="">
+                    <span class="form__list__header">Мои адреса</span>
+                    <div id="pickup__list" class="pickup__list"></div>
+                    <div class="margin__bottom">
+                      <button class="order__button pick" type="submit">Выбрать</button>
+                    </div>
+                  </form>
+
+                  <form id="to__my__address" class="my__address__form" action="">
+                    <span class="form__list__header">Мои адреса</span>
+                    <div id="myAddress__list" class="pickup__list"></div>
+                    <div class="margin__bottom">
+                      <button class="order__button pick" type="submit">Выбрать</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+              <div class="grid__container" id="delivery__method">
+                  <span class="grid__item semibold">Пункт выдачи</span>
+
+                  <div class="grid__item basic__flex">
+                    <span>Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</span>
+                    <span>
+                      <span> 
+                        <img src="public/cart_view/star.svg" alt=""> 4.99
+                      </span>
+                      <span> Ежедневно с 10 до 21</span>
+                    </span>
+                  </div>
+                  <span class="grid__item semibold">Стоимость доставки</span>
+                  <span class="grid__item">Бесплатно</span>
+                  <!-- <span class="grid__item semibold">5—6 февраля</span>
+                  <span class="grid__item">доставят товары</span>
+                  <span class="grid__item semibold">7—8 февраля</span>
+                  <span class="grid__item">доставят товары</span> -->
+              </div>
+
+              <div class="white__footerBox">
+                <img src="assets/cart_view/price shipping (1).svg" alt="">
+                <span class="return__text">
+                  Обратная доставка товаров на склад при отказе — 
+                    <span class="return__price tooltip"> бесплатно
+                      <span class="tooltiptext centered__tip">Если товары вам не подойдут, мы вернем их обратно на склад — это бесплатно</span> 
+                    </span>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- способ оплаты -->
+          <div class="white__container">
+            <div class="white__contentBox">
+
+              <div class="white__headerBox">
+                <span class="header">Cпособ оплаты</span>
+                <button 
+                onclick="toggleCardModal(event)"
+                class="text__button"> 
+                  <span class="edit__link">Изменить</span>
+                </button>
+              </div>
+
+              <!-- модал c карточками -->
+              <div id="card__Modal" class="modal">
+                <div class="modal-content">
+
+                  <div class="white__headerBox">
+                    <span class="modal__header">Способ оплаты</span> 
+                    <button 
+                    onclick="closeModal('card__Modal')"
+                    class="modal__close"> 
+                      <img src="/assets/cart_view/Union.svg" alt="">
+                    </button>
+                  </div>
+                  <form id="cards__form" class="cards__form">
+                    <div id="cards__list"></div>
+                    <div>
+                      <button class="order__button pick" type="submit">Выбрать</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div class="card__container" id="card__container">
+                  <img src="assets/cards/mir.svg" alt="">    
+                <div class="centered__flex basic__text">
+                  1234 56•• •••• 1234
+                </div>
+                <div class="centered__flex basic__text">
+                  01/30
+                </div>
+              </div>
+
+              <span class="return__text gray" id="payment__checked">Спишем оплату с карты при получении</span>
+
+            </div>
+          </div>
+
+          <!-- получатель -->
+          <div class="white__container">
+
+            <div class="white__contentBox">
+
+              <span class="header">Получатель</span>
+
+              <form id="buyer__form" action="">
+
+                <div class="adapt__flex gray gap24 padding12">
+
+                  <div class="form__flex">
+                    <input 
+                      onfocusout="validateName()"
+                      value=""
+                      onkeyup="this.setAttribute('value', this.value);"
+                      class="buyer__input basic__text" 
+                      type="text" 
+                      placeholder="" 
+                      id="name" 
+                      name="name"
+                    >
+                    <label for="name" class="form__label return__text black" id="name__label">Имя</label>
+                    <span class="input__err" id="name__err"></span>
+                  </div>
+
+                  <div class="form__flex">
+                    <input 
+                      onfocusout="validateSurname()"
+                      value=""
+                      onkeyup="this.setAttribute('value', this.value);"
+                      class="buyer__input basic__text" 
+                      type="text" 
+                      placeholder=""
+                      id="surname" 
+                      name="surname"
+                    >
+                    <label for="surname" class="form__label return__text black" id="surname__label">Фамилия</label>
+                    <span class="input__err" id="surname__err"></span>
+                  </div>
+
+                </div>
+
+                <div class="adapt__flex gray gap24">
+                  <div class="form__flex">
+                    <input 
+                      onfocusout="validateEmail()"
+                      value=""
+                      onkeyup="this.setAttribute('value', this.value);"
+                      class="buyer__input basic__text" 
+                      type="email" 
+                      required
+                      placeholder=""
+                      id="email" 
+                      name="email"
+                    >
+                    <label for="email" class="form__label return__text black" id="email__label">Электронная почта</label>
+                    <span class="input__err" id="email__err"></span>
+                  </div>
+
+                  <div class="form__flex">
+                    <input 
+                      onfocusout="validatePhone()"
+                      value=""
+                      onkeyup="this.setAttribute('value', this.value);"
+                      class="buyer__input basic__text" 
+                      type="tel" 
+                      required
+                      placeholder=""
+                      id="phone" 
+                      name="phone"
+                    >
+                    <label for="phone" class="form__label return__text black" id="phone__label">Телефон</label>
+                    <span class="input__err" id="phone__err"></span>
+                  </div>
+
+                  <div class="form__flex">
+                    <input 
+                      onfocusout="validateInn()"
+                      value=""
+                      onkeyup="this.setAttribute('value', this.value);"
+                      class="buyer__input basic__text" 
+                      type="number" 
+                      required
+                      placeholder=""
+                      id="inn" 
+                      name="inn"
+                    >
+                    <label for="inn" class="form__label return__text black" id="inn__label">ИНН для таможни</label>
+                    <span class="input__err" id="inn__err"></span>
+                  </div>
+
+                </div>
+              </form>
+            </div>          
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="total__container">
+        <div class="total__inside">
+
+          <ul class="total__ul">
+            <li 
+            class="total__li"
+            style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">
+              <span class="total__li__start">Итого</span>
+              <span id="side__checkout__summ" class="total__li__end">0</span>
+              <span style="display: flex; font-size: 20px; font-weight: 700;">&nbsp;сом</span>
+            </li>
+            <li class="total__li">
+              <span id="side__total__qty">0</span>
+              <span class="total__li__start">&nbsp;товара</span>
+              <span class="total__li__end" id="side__total__summ">0</span>
+              <span  class="total__li__end">&nbsp;сом</span>
+            </li>
+            <li class="total__li">
+              <span class="total__li__start">Скидка</span>
+              <span class="total__li__end">−</span>
+              <span class="total__li__end" id="side__total__discount">0</span>
+              <span class="total__li__end">&nbsp;сом</span>
+
+            </li>
+            <li class="total__li">
+              <span class="total__li__start">Доставка</span> 
+              <span class="total__li__end">Бесплатно</span>
+            </li>
+          </ul>
+        
+          <div class="total__delivery" id="side__delivery__method">
+            <div class="total__header">
+              <span>Доставка в пункт выдачи</span>
+              <button 
+              onclick="toggleAddressesModal(event)"
+              class="edit__btn"
+              style="margin-left: auto;">
+                <img src="assets/cart_total/Vector (3).svg" alt="">
+              </button>
+            </div>
+            <span class="delivery__adress">Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</span>
+            <span class="delivery__date">5–8 фев</span>
+          </div>
+
+          <div class="return__container">
+            <img src="assets/cart_total/price shipping.svg" alt="">
+            <div>
+              <span>Обратная доставка товаров на склад при отказе — </span>
+              <span class="return__price tooltip"> бесплатно
+                <span class="tooltiptext start__tip">Если товары вам не подойдут, мы вернем их обратно на склад — это бесплатно</span> 
+              </span>
+            </div>
+          </div>
+
+          <div class="payment__container">
+            <div class="total__header">
+              <span>Оплата картой</span>
+              <button 
+              onclick="toggleCardModal(event)"
+              class="edit__btn"
+              style="margin-left: auto;">
+                <img src="assets/cart_total/Vector (3).svg" alt="">
+              </button>
+            </div>
+            <div class="card__container" id="side__card__container">
+                <img src="assets/cards/mir.svg" alt="">
+              <div class="centered__flex">
+                1234 12•• •••• 1234
+              </div>
+            </div>
+            <div class="payment__time">
+              <div class="payment__label">
+                <input class="checkbox" type="checkbox" name="peas" onclick="togglePayment()" />
+                <label class="payment__label">
+                  Списать оплату сразу
+                </label>
+              </div>
+              <span class="payment__checked" id="side__payment__checked" style="padding-left: 2px;">Спишем оплату с карты при получении</span>
+            </div>
+          </div>
+
+          <div class="place__order">
+
+            <button onclick="validateForm()" id="order__button" class="order__button">Заказать</button>
+
+            <div class="order__check">
+              <input class="agreement__checkbox" type="checkbox" name="peas" checked />
+              <span>Соглашаюсь с <span class="rules__underline">правилами пользования торговой площадкой</span> и <span class="rules__underline">возврата</span></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer__container">
+      <p class="footer__p">2023 © ООО "Товары и точка"</p>
+    </footer>
+    <div class="extra__footer__mobile">
+      <div class="extra__footer__mobile__icon">
+        <img src="assets/mobile/main.svg" alt="">
+      </div>
+      <div class="extra__footer__mobile__icon">
+        <img src="assets/mobile/catalog.svg" alt="">
+      </div>
+      <div class="icon__container extra__footer__mobile__icon">
+        <img  src="assets/mobile/cart.svg" alt="">
+        <div 
+        style="left: 60%; bottom: 15px;"
+        class="cart__count__container" 
+        id="footer__cart__pos__count">
+          0
+        </div>
+      </div>
+
+      <div class="extra__footer__mobile__icon">
+        <img src="assets/mobile/favorites.svg" alt="">
+      </div>
+      <div class="extra__footer__mobile__icon">
+        <img src="assets/mobile/profile.svg" alt="">
+      </div>
+    </div>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyB_SCQ3188blvcqqNm3wnVtSxhjPhcW8ek",
+        authDomain: "wb-test-task-0.firebaseapp.com",
+        projectId: "wb-test-task-0",
+        storageBucket: "wb-test-task-0.appspot.com",
+        messagingSenderId: "601784311742",
+        appId: "1:601784311742:web:b75336a9950d9642a8e3ef"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
+
+  </body>
+</html>

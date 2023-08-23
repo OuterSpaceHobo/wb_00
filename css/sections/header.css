@@ -1,0 +1,236 @@
+.header__nav {
+  display: flex;
+  overflow: hidden;
+  height: 86px;
+  width: 100vw;
+}
+
+@media only screen and (min-width: 1400px) {
+  .header__nav {
+    width: 1400px;
+  }
+}
+
+.header__logo {
+  display: flex;
+  position: relative;
+  padding-left: 25px;
+  padding-top: 19px;
+  padding-right: 30px;
+}
+
+.header__hamburger {
+  border-radius: 8px;
+  padding: 11px 9px 7px;
+  border: 1px solid rgba(211,211,211, 0.45);
+  height: fit-content;
+  margin-right: 16px;
+}
+
+.header__name {
+  font-family: 'Segoe UI';
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.search__input {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: end;
+  margin: auto;
+  border-radius: 30px;
+  background-color: rgba(211,211,211, 0.20);
+  padding: 12px 20px 12px 20px;
+}
+
+.input__field {
+  width: 90%;
+  position: absolute;
+  left: 20px;
+  bottom: 33%;
+  border: none;
+  font-family: "Segoe ui";
+  font-size: 18px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+  border: 0px;
+  vertical-align: baseline;
+
+
+  border: none;
+  background: none;
+  line-height: 24px;  
+  font-style: normal;
+  font-weight: normal;
+  color: white;
+}
+
+.input__field::placeholder {
+  color: rgba(211,211,211, 0.45);
+}
+
+*:focus {
+  outline: none;
+}
+
+.input__field {
+  flex: 1;
+}
+
+.submit__btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  color: rgba(211,211,211, 0.45);
+}
+
+.profile__container {
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-left: 32px;
+}
+
+.icon__container {
+  height: 28px;
+  width: 28px;
+  position: relative;
+}
+
+.cart__container {
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding-left: 42px;
+  padding-right: 25px;
+}
+
+.icon__text {
+  color: white;
+  font-size: 13px;
+  font-family: 'Segoe UI';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.cart__count__container {
+  position: absolute; 
+  bottom: 21px; 
+  left: 20px; 
+  width: 16px;
+  height: 16px;
+
+  line-height: 16px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 10px;
+  background-color: #F55123;
+
+  text-align: center;
+  color: white;
+  font-family: 10px; 
+  font-family: 'Segoe UI';
+  font-weight: bold;
+  padding: 1px;
+}
+
+.cart__count {
+  color: white;
+  font-size: 10px;
+  font-family: 'Segoe UI';
+  font-weight: bold;
+  font-style: normal;
+}
+
+.header__logo  {
+  color: #fff;
+  display: flex;
+  position: relative;
+}
+
+.header__name__mobile {
+  display: none;
+}
+
+.header__hamburger__mobile__search {
+  display: none;
+}
+
+.header__logo__mobile {  
+  display: none;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .search__input {
+    display: none;
+  }
+  .profile__container {
+    display: none;
+  }
+  .cart__container {
+    display: none;
+  }
+  .header__name {
+    display: none;
+  }
+  .header__hamburger {
+    display: none;
+  }
+  .header__name__mobile {
+    display: block;
+    font-family: 'Segoe UI';
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: white;
+    margin-top: 22px;
+  }
+  .header__hamburger__mobile {
+    display: block;
+    margin-right: auto;
+    padding-left: 13px;
+    padding-top: 4px;
+  }
+  .header__hamburger__mobile__search {
+    display: block;
+    margin-left: auto;
+    padding-right: 13px;
+    padding-top: 4px;
+  }
+  .header__logo__mobile {
+    display: flex;
+  }
+  .header__logo {
+    display: none;
+  }
+  .header__nav {
+    height: 56px;
+  }
+}
+

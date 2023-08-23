@@ -1,0 +1,528 @@
+.main__container {
+    display: flex;
+    border-radius: 25px;
+    background: rgba(255,255,255, 0.95);
+    overflow: hidden;
+    min-width: fit-content;
+    width: 100vw;
+    height: fit-content;
+    gap: 32px;
+}
+
+.bucket__container {
+    flex: 1;
+    max-width: 891px;
+    display: flex;
+    /* margin-left: 22px; */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    /* padding-right: 10px; */
+}
+
+.total__container {
+    flex: 1;
+    /* max-width: 429px; */
+    height: fit-content;
+    display: flex;
+    background: #fff;
+    /* margin-right: 24px; */
+    margin-top: 22px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+}
+
+.cart__header {
+    font-family: 'Segoe UI';
+    font-weight: 700;
+    font-style: normal;
+    line-height: 28px;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.checkbox {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    background-color: #F6F6FA;
+    color: #F6F6FA;
+    border-radius: 5px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0, 0.2);
+    margin: 0;
+}
+
+.checkbox:checked:after {
+    position: absolute;
+    background-color: #CB11AB; 
+    border: none;
+    top: -1px;
+    left: -1px;
+    border-radius: 5px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: url("../../assets/cart_total/Path Copy 2 (Stroke) (1).svg");
+    color: white;
+}
+
+.checkbox__mobile {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: #F6F6FA;
+    color: #F6F6FA;
+    border-radius: 5px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0, 0.2);
+    margin: 0;
+}
+
+.checkbox__mobile:checked:after {
+    position: absolute;
+    background-color: #CB11AB; 
+    border: none;
+    top: -1px;
+    left: -1px;
+    border-radius: 5px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: url("../../assets/cart_total/Path Copy 2 (Stroke) (1).svg");
+    color: white;
+}
+
+.start__tip {
+    width: 256px;
+    position: absolute;
+    z-index: 1;
+    top: 140%;
+    left: 0%;
+}
+
+.centered__tip {
+    width: 256px;
+    position: absolute;
+    z-index: 1;
+    top: 140%;
+    left: -180%;
+}
+
+.end__tip {
+    width: 256px;
+    position: absolute;
+    z-index: 1;
+    top: 140%; 
+    right: -10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .main__container {
+        flex-direction: column;
+        gap: 0px;
+        margin-left: 0px;
+    }
+    .header {
+        line-height: 28px;
+        font-size: 20px;
+    }
+    .bucket__container {
+        margin-bottom: 0px;
+        margin-top: 15px;
+
+    } 
+    .total__container {
+        margin-top: 0px;
+        background: linear-gradient(rgba(0,0,0,0), 20%, #fff);
+        box-shadow: none;
+    }
+    .cart__header {
+        font-family: 'Segoe UI';
+        font-weight: 700;
+        font-style: normal;
+        line-height: 28px;
+        font-size: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 16px;
+    }
+    .start__tip {
+        width: 256px;
+        position: absolute;
+        z-index: 1;
+        top: 140%;
+        left: -210%;
+    }
+    .centered__tip {
+        width: 256px;
+        position: absolute;
+        z-index: 1;
+        top: 140%;
+        left: -140%;
+    }
+    .end__tip {
+        width: 150px;
+        position: absolute;
+        z-index: 1;
+        top: 140%;
+        right: -20px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .main__container {
+      flex-direction: row;
+      gap: 32px;
+    }
+    .bucket__container {
+      max-width: 1026px;
+      margin-left: 22px;
+    } 
+    .total__container {
+      width: 304px;
+      max-width: 304px;
+      margin-right: 24px;
+    }
+    .header {
+      line-height: 32px;
+      font-size: 24px;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .main__container {
+      width: 1400px;
+      gap: 32px;
+    }
+    .bucket__container {
+      width: 891px;
+      margin-left: 22px;
+    }
+    .total__container {
+      width: 429px;
+      max-width: 429px;
+      margin-right: 24px;
+    }
+    .header {
+        line-height: 32px;
+        font-size: 24px;
+      }
+}
+
+.total__inside {
+    width: 100%;
+    height: fit-content;
+    margin: 20px 24px 24px 24px;
+}
+
+.total__ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    font-style: normal;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.total__li {
+    display: flex;
+    align-items: baseline;
+
+}
+
+.total__li__end {
+    display: flex;
+    margin-left: auto;
+    white-space: pre;
+}
+
+.total__li__start {
+    flex: 1;
+
+}
+
+.total__delivery {
+    display: flex;
+    flex-direction: column;
+}
+
+.total__header {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+    font-family: 'Segoe UI';
+    font-weight: 700;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.delivery__adress {
+    margin-top: 5px;
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+.delivery__date {
+    margin-top: 4px;
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+    color: #CB11AB;
+    width: fit-content;
+    text-decoration: underline dashed 2px;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(203, 17, 171, 0.1);
+}
+
+.edit__btn {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.return__container {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 8px 10px;
+    background-color: #F6F6FA;
+    border-radius: 5px;
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+.return__price {
+    margin-top: 2px;
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+    color: #0CB477;
+    width: fit-content;
+    text-decoration: underline dashed 2px;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(12,180,119, 0.1);
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: #fff;
+    color: black;
+    text-align: start;
+    border-radius: 5px;
+    padding: 12px 16px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+    position: absolute;
+}
+
+/* .centered__tip {
+    width: 256px;
+    position: absolute;
+    z-index: 1;
+    top: 140%;
+    left: -180%;
+} */
+
+/* .start__tip {
+    width: 256px;
+    position: absolute;
+    z-index: 1;
+    top: 140%;
+    left: 0%;
+} */
+
+/* .end__tip {
+    width: 256px;
+    position: absolute;
+    z-index: 1;
+    top: 140%; 
+    right: -10px;
+} */
+
+.tip__container {
+    display: flex;
+}
+
+.tip__flex { 
+    display: flex;
+    margin-left: auto;
+}
+
+.tip__text {
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+.flex__col {
+    display: flex;
+    flex-direction: column;
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.payment__container {
+    margin-top: 26px;
+}
+
+.card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6F6FA;
+    width: fit-content;
+    padding: 8px 2px;
+    border-radius: 5px;
+}
+
+/* .card__container {
+    margin-top: 2px;
+    display: flex;
+    gap: 8px;
+    min-height: 25px;
+} */
+
+.centered__flex {
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.payment__time {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 5px 10px;
+    background-color: #F6F6FA;
+    border-radius: 10px;
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+.payment__label {
+    font-family: 'Segoe UI';
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 13px;
+    gap: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 2px;
+}
+
+.place__order {
+    margin-top: 25px;
+}
+
+.order__button {
+    width: 100%;
+    height: 44px;
+    padding-left: 24px;
+    padding-right: 24px;
+    flex: 1;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: #CB11AB; 
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.order__button:hover {
+    cursor: pointer;
+}
+
+.order__check {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    font-family: 'Segoe UI';
+    font-weight: regular;
+    line-height: 16px;
+    font-size: 13px;
+    gap: 4px;
+}
+
+.agreement__checkbox {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.agreement__checkbox:checked:after {
+    content: url("../../assets/cart_total/Path Copy 2 (Stroke).svg");
+    color: black;
+}
+
+.payment__checked {
+    display: block;
+}
