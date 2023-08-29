@@ -1,0 +1,65 @@
+.delivery__list {
+    display: flex;
+}
+
+.delivery__itemImg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    direction: rtl;
+}
+
+.delivery__count__container {
+    position: absolute; 
+    /* top: -9px; */
+    height: 16px;
+    width: fit-content;
+    min-width: 8px;
+  
+    line-height: 16px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 10px;
+    background-color: #F55123;
+  
+    text-align: center;
+    color: white;
+    font-family: 10px; 
+    font-family: 'Segoe UI';
+
+    font-weight: 600;
+    padding: 0px 4px;
+}
+
+.delivery__count__box {
+    position: absolute; 
+    top: -9px;
+    height: 16px;
+    width: fit-content;
+    min-width: 8px;
+  
+    line-height: 16px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 10px;
+  
+    text-align: center;
+    color: white;
+    font-family: 10px; 
+    font-family: 'Segoe UI';
+
+    font-weight: 600;
+    padding: 0px 4px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .delivery__gap {
+        margin-bottom: 16px;
+    } 
+    .delivery__itemImg {
+        margin-top: 12px;
+    }
+}

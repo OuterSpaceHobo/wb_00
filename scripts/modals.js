@@ -1,5 +1,5 @@
 import { pickUpPoints, user } from './data.js'
-import star from './public/cart_view/star.svg'
+import star from '../public/cart_view/star.svg'
 
 // Модалы
 
@@ -82,12 +82,12 @@ function toggleCardModal (event) {
     },
     false,
     );
-  
-    let rez = pickUpPoints.map(address => `
+
+    let rez = pickUpPoints.map( (address, index) => `
   
     <div class="check__cardImg">
       <label class="addresses__container" for=${address.id}>
-        <input type="radio" id=${address.id} name='pickup__address' value=${address.id} />
+        <input type="radio" id=${address.id} name='pickup__address' value=${address.id} ${index === 0 ? 'checked' : ''} />
         <span class="radio__checkmark"></span>
 
         <div>
@@ -132,11 +132,11 @@ function toggleCardModal (event) {
     false,
     );
   
-    let rez = user.addresses.map(address => `
+    let rez = user.addresses.map( (address, index) => `
   
     <div class="check__cardImg">
       <label class="addresses__container" for=${address.id}>
-        <input type="radio" id=${address.id} name='home__address' value=${address.id} />
+        <input type="radio" id=${address.id} name='home__address' value=${address.id} ${index === 0 ? 'checked' : ''} />
         <span class="radio__checkmark"></span>
         <span>${address.city}, ${address.block ? `${address.block}, ` : ``} ${address.street}, д. ${address.blockAppt}</span>
         <button class="bucket__button" type="button">
@@ -151,12 +151,13 @@ function toggleCardModal (event) {
 
   
   const renderDelivery = (data, type, sideType) => {
-    const delMethod = document.getElementById('delivery__method')
     const delMethodSide = document.getElementById('side__delivery__method')
-  
-    const rez = `
-    <span class="grid__item semibold">${type}</span>
-    <div class="grid__item basic__flex">
+    const delType = document.getElementById('delivery__type__field')
+    const delAddress = document.getElementById('delivery__address__field')
+    
+    delType.innerText = type;
+
+    const delRez = `
       <span>${data.city}, ${data.block ? `${data.block}, ` : ``} ${data.street}, д. ${data.blockAppt}</span>
       <span>
         <span> 
@@ -164,14 +165,8 @@ function toggleCardModal (event) {
         </span>
         <span> Ежедневно с 10 до 21</span>
       </span>
-    </div>
-    <span class="grid__item semibold">Стоимость доставки</span>
-    <span class="grid__item">Бесплатно</span>
-    <span class="grid__item semibold">5—6 февраля</span>
-    <span class="grid__item">доставят товары</span>
-    <span class="grid__item semibold">7—8 февраля</span>
-    <span class="grid__item">доставят товары</span>
     `
+    delAddress.innerHTML = delRez
   
     const rezSide = `
     <div class="total__header">
@@ -186,8 +181,6 @@ function toggleCardModal (event) {
     <span class="delivery__adress">${data.city}, ${data.block ? `${data.block}, ` : ``} ${data.street}, д. ${data.blockAppt}</span>
     <span class="delivery__date">5–8 фев</span>
     `
-  
-    delMethod.innerHTML = rez
     delMethodSide.innerHTML = rezSide
   }
   window.renderDelivery = renderDelivery

@@ -46,7 +46,7 @@
 .dropdown-content {
     display: none;
     min-width: 100%;
-    overflow: auto;
+    /* overflow: auto; */
     z-index: 1;
     padding-right: 32px;
 }
@@ -70,6 +70,10 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 32px;
 }
 
 .checkAll__container {
@@ -101,7 +105,7 @@
     gap: 12px;
     display: flex;
     align-items: start;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
  
 .icons__hover__container {
@@ -124,6 +128,35 @@
     margin-right: 8px;
     display: flex;
     flex-direction: column;
+    margin-bottom: auto;
+}
+
+.item__size__mobile {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    min-width: 22px;
+    max-width: calc(100% - 16px);
+    height: 22px;
+    background-color: #F6F6FA;
+    border-radius: 5px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    text-align: center;
+}
+
+.item__size__p {
+    margin: 0;
+    padding: 0px 3px;
+	border: 0;
+    font-size: 14px;
+    line-height: 20px;
+	vertical-align: baseline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .item__name {
@@ -134,6 +167,8 @@
     margin: 0;
 	padding: 0;
 	border: 0;
+    padding-bottom: 8px;
+
 }
 
 .item__additional {
@@ -143,6 +178,10 @@
     font-size: 13px;
 }
 
+.size__desctop {
+    display: block;
+}
+
 .gray {
     color: #A0A0A4;
 }
@@ -150,18 +189,19 @@
 .item__col__size {
     display: flex;
     gap: 16px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    /* margin-top: 8px;
+    margin-bottom: 8px; */
 }
 
 .item__seller__info {
     display: flex;
     gap: 6px;
     align-items: center;
-    margin-top: 2px;
+    /* margin-top: 2px; */
 }
 
 .check__itemImg {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -236,6 +276,7 @@
     font-size: 20px;
     margin-bottom: 2px;
     line-height: 24px;
+    color: rgba(0, 0, 0, 0.2);
 }
 
 .item__remained {
@@ -292,6 +333,13 @@
 .currency__string {
     font-size: 16px;
     font-weight: bold;
+}
+
+.value__string {
+    font-size: 20px;
+    font-weight: bold;
+    -webkit-transition: 300ms ease all;
+    transition: 300ms ease all;
 }
 
 .check__itemImg__mobile {
@@ -390,6 +438,12 @@
         width: fit-content;
         gap: 22px;
         margin-top: 2px;
+    }
+    .items__list {
+        gap: 16px;
+    }
+    .size__desctop {
+        display: none;
     }
 }
 

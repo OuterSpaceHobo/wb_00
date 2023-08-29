@@ -113,7 +113,7 @@
 .icon__container {
   height: 28px;
   width: 28px;
-  position: relative;
+  /* position: relative; */
 }
 
 .cart__container {
@@ -138,8 +138,8 @@
 
 .cart__count__container {
   position: absolute; 
-  bottom: 21px; 
-  left: 20px; 
+  top: -9px;
+  left: 21px; 
   width: 16px;
   height: 16px;
 
@@ -154,7 +154,7 @@
   font-family: 10px; 
   font-family: 'Segoe UI';
   font-weight: bold;
-  padding: 1px;
+  padding: 0px;
 }
 
 .cart__count {

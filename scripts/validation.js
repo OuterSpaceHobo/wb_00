@@ -33,6 +33,7 @@ function validateName(){
   } else if ( !x && checkOut ) {
     validationErr("name", "name__err", "name__label")
     document.getElementById("name").oninput = validateName
+    elem.scrollIntoView()
   } else if (!nameSurnameRegex.test(x)) {
     validationErr("name", "name__err", "name__label")
     document.getElementById("name").oninput = validateName
@@ -53,6 +54,7 @@ function validateSurname(){
   } else if (!x && checkOut) {
     validationErr("surname", "surname__err", "surname__label")
     document.getElementById("surname").oninput = validateSurname
+    elem.scrollIntoView()
   } else if (!nameSurnameRegex.test(x)) {
     validationErr("surname", "surname__err", "surname__label")
     document.getElementById("surname").oninput = validateSurname
@@ -74,6 +76,7 @@ function validateEmail(){
   } else if (!x && checkOut) {
     validationErr("email", "email__err", "email__label")
     document.getElementById("email").oninput = validateEmail
+    elem.scrollIntoView()
   } else if (!emailRegex.test(x)) {
     validationErr("email", "email__err", "email__label")
     document.getElementById("email").oninput = validateEmail
@@ -95,6 +98,7 @@ function validatePhone(){
   } else if (!x && checkOut) {
     validationErr("phone", "phone__err", "phone__label")
     document.getElementById("phone").oninput = validatePhone
+    elem.scrollIntoView()
   } else if (!reg.test(x)) {
     validationErr("phone", "phone__err", "phone__label")
     document.getElementById("phone").oninput = validatePhone
@@ -117,6 +121,7 @@ function validateInn(){
   } else if (!x && checkOut) {
     validationErr("inn", "inn__err", "inn__label")
     document.getElementById("inn").oninput = validateInn
+    elem.scrollIntoView()
   } else if (!reg.test(x)) {
     validationErr("inn", "inn__err", "inn__label")
     document.getElementById("inn").oninput = validateInn

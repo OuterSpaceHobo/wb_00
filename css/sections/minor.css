@@ -197,8 +197,7 @@ input[type=number] {
     .grid__container {
         display: grid;
         grid-template-columns: auto;
-        row-gap: 6px;
-
+        row-gap: 0px;
     }
     .header {
         line-height: 28px;

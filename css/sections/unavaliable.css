@@ -39,7 +39,7 @@
     gap: 12px;
     display: flex;
     align-items: start;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 .unavaliable__item__container:hover  .qty__item__icons{
@@ -70,7 +70,7 @@
         border-top: 1px solid rgba(0,0,0, 0.2);
         flex-direction: column;
         padding-top: 12px;
-        padding-bottom: 12px;
+        /* padding-bottom: 12px; */
         gap: 0px;
     }
 }
