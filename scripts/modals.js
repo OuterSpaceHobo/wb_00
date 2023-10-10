@@ -1,5 +1,7 @@
 import { pickUpPoints, user } from './data.js'
 import star from '../public/cart_view/star.svg'
+import editIcon from '../public/cart_total/Vector_(3).svg'
+
 
 // Модалы
 
@@ -7,6 +9,7 @@ function toggleCardModal (event) {
     event.preventDefault();
     const modal = document.getElementById('card__Modal')
     modal.style.display = "flex";
+    renderCards()
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
@@ -91,7 +94,7 @@ function toggleCardModal (event) {
         <span class="radio__checkmark"></span>
 
         <div>
-          <span>${address.city}, ${address.block ? `${address.block}, ` : ``} ${address.street}, д. ${address.blockAppt}</span>
+          <span class="adderess__span">${address.city}, ${address.block ? `${address.block}, ` : ``} ${address.street}, д. ${address.blockAppt}</span>
           <div>
             <img src=${star} alt="">
             <span class="return__text">${address.rating}</span>
@@ -138,7 +141,7 @@ function toggleCardModal (event) {
       <label class="addresses__container" for=${address.id}>
         <input type="radio" id=${address.id} name='home__address' value=${address.id} ${index === 0 ? 'checked' : ''} />
         <span class="radio__checkmark"></span>
-        <span>${address.city}, ${address.block ? `${address.block}, ` : ``} ${address.street}, д. ${address.blockAppt}</span>
+        <span class="adderess__span">${address.city}, ${address.block ? `${address.block}, ` : ``} ${address.street}, д. ${address.blockAppt}</span>
         <button class="bucket__button" type="button">
         </button>
       </label>
@@ -175,7 +178,7 @@ function toggleCardModal (event) {
       onclick="toggleAddressesModal(event)"
       class="edit__btn"
       style="margin-left: auto;">
-        <img src="assets/cart_total/Vector (3).svg" alt="">
+        <img src=${editIcon} alt="">
       </button>
     </div>
     <span class="delivery__adress">${data.city}, ${data.block ? `${data.block}, ` : ``} ${data.street}, д. ${data.blockAppt}</span>
@@ -184,3 +187,75 @@ function toggleCardModal (event) {
     delMethodSide.innerHTML = rezSide
   }
   window.renderDelivery = renderDelivery
+
+
+  function renderCards() {
+    let cards = document.getElementById("cards__list");
+    const cardsForm = document.getElementById("cards__form")
+    
+    cardsForm.addEventListener(
+    "submit",
+    (event) => {
+      const data = new FormData(cardsForm);
+      let output = "";
+      for (const entry of data) {
+        output = `${entry[1]}`
+      }
+      // console.log('form output', output)
+      event.preventDefault();
+      const picked = user.cards.find(card => card.id === output)
+      // console.log('picked', picked)
+      renderCard(picked)
+      document.getElementById('card__Modal').style.display = "none";
+  
+    },
+    false,
+    );
+  
+    const renderCard = async (cardData) => {
+      const pickedCard = document.getElementById('card__container')
+      const pickedCardSide = document.getElementById('side__card__container')
+  
+      const rez = `
+      <img src=${cardData.img} alt="">    
+      <div class="centered__flex basic__text">
+        ${bulletCard(cardData.number)}
+      </div>
+      <div class="centered__flex basic__text">
+        ${cardData.expiry__date}
+      </div>
+      `
+  
+      const rezSide = `
+      <img src=${cardData.img} alt="">
+      <div class="centered__flex">
+        ${bulletCard(cardData.number)}
+      </div>`
+  
+      pickedCard.innerHTML = rez
+      pickedCardSide.innerHTML = rezSide
+    }
+  
+  
+    const bulletCard = (num) => {
+      let number = num.toString().split('').map(Number);
+      number.splice(6, 6, '•', '•', '•', '•', '•', '•');
+      const rezult = number.join('').match(/.{1,4}/g).join(' ')
+      return rezult
+    }
+  
+    let rez = user.cards.map((card, index) => `
+  
+    <div class="check__cardImg">
+      <label class="card__container modal__padding" for=${card.id}>
+        <input type="radio" id=${card.id} name='card' value=${card.id} ${index === 0 ? 'checked' : ''} />
+        <span class="radio__checkmark"></span>
+        <img class="item__image" src="${card.img}" alt="">
+        <span class="item__name adderess__span">${bulletCard(card.number)}</span>
+      </label>
+    </div>
+  
+    `)
+    cards.innerHTML = rez.join('');
+  }
+  window.renderCards = renderCards

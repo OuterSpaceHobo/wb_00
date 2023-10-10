@@ -1,8 +1,9 @@
-import {products, user } from './data.js'
+import { products, user } from './data.js'
+import { WordEnding } from './service.js'
 
 export function renderCart(cart) {
     // console.log('init cart', cart )
-    let prods = document.getElementById("items__list");
+    const prods = document.getElementById("items__list");
   
     let rez = products.map(product => `
     <li class="item__container">
@@ -10,12 +11,12 @@ export function renderCart(cart) {
     <div class="item__block">
   
       <div class="check__itemImg">
-        <input id="item__checkbox" onclick="singleInputToggle(event, '${product.id}')" name="item__checkbox" class="checkbox" type="checkbox" name="peas" checked />
+        <input id="item__checkbox__${product.id}" onclick="singleInputToggle(event, '${product.id}', name)" name="${genCheckboxName()}" class="checkbox" type="checkbox" name="peas" checked />
         <img name="desc__img" class="item__image" src="${product.img}" alt="" width="72" height="96">
       </div>
   
       <div class="check__itemImg__mobile">
-      <input id="item__checkbox" onclick="singleInputToggle(event, '${product.id}')" name="item__checkbox" class="checkbox__mobile" type="checkbox" name="peas" checked />
+      <input id="item__checkbox__${product.id}" onclick="singleInputToggle(event, '${product.id}', name)" name="${genCheckboxName()}" class="checkbox__mobile" type="checkbox" name="peas" checked />
       ${product.size ? `<div class="item__size__mobile"><p class="item__size__p">${product.size}</p></div>` : ``}
       <img name="mobile__img" class="item__image" src="${product.img__mobile}" alt="" width="80" height="106">
       </div>
@@ -62,8 +63,8 @@ export function renderCart(cart) {
         <p class="item__name">${product.name}</p>
   
         <div class="item__col__size">
-          ${product.color ? `<span style="margin: 0px 0px 8px 0px" class="item__additional">Цвет: ${product.color}</span>` : ``}
-          ${product.size ? `<span style="margin: 0px 0px 8px 0px" class="item__additional size__desctop">Размер: ${product.size}</span>` : ``}
+          ${product.color ? `<span style="margin: 4px 0px 5px 0px" class="item__additional">Цвет: ${product.color}</span>` : ``}
+          ${product.size ? `<span style="margin: 4px 0px 5px 0px" class="item__additional size__desctop">Размер: ${product.size}</span>` : ``}
         </div>
   
         <span class="item__additional gray">${product.warehouse}</span>
@@ -94,7 +95,7 @@ export function renderCart(cart) {
       ${+product.in_stock <= 5 ? `<span class="item__remained">Осталось ${product.in_stock} шт.</span>` : ``}
       <div class="icons__hover__container">
         <div class="qty__item__icons">
-          <button class="cart__heart__button" type="button"></button>
+          <button onClick="toggleFavorites('${product.id}', event)" class="cart__heart__button" id="cart__heart__${product.id}" type="button"></button>
           <button class="cart__bucket__button" type="button"></button>
         </div>
       </div>
@@ -138,8 +139,8 @@ export function renderCart(cart) {
   }
   
   
-  export function renderUnavaliable() {
-    let nostock = document.getElementById("unavaliable__list");
+export function renderUnavaliable() {
+    const nostock = document.getElementById("unavaliable__list");
     let rez = products.map(product => `
     <li class="unavaliable__item__container">
   
@@ -166,7 +167,7 @@ export function renderCart(cart) {
     <div class="unaval__item__icons">
       <div class="icons__hover__container">
         <div class="qty__item__icons">
-          <button class="cart__heart__button" type="button"></button>
+          <button onClick="toggleFavorites('${product.id}', event)" class="cart__heart__button" id="cart__heart__${product.id}" type="button"></button>
           <button class="cart__bucket__button" type="button"></button>
         </div>
       </div>
@@ -174,88 +175,58 @@ export function renderCart(cart) {
   
     </li>`)
     nostock.innerHTML = rez.join('');
-  }
+}
   
-  export function renderDelivery() {
-    let deliveryList = document.getElementById("delivery__list");
+export function renderDelivery() {
+    const deliveryList = document.getElementById("delivery__list");
+    const additionalList = document.getElementById("delivery__list__additional");
     let rez = products.map(product => `
     <div class="delivery__itemImg">
     <div id="delivery__count__container__${product.id}" class="delivery__count__box"></div>
       <img class="item__image" src="${product.img__delivery}" alt="" width="40" height="56">
     </div>
-    `
-    )
-    deliveryList.innerHTML = rez.join('');
-    // <div id="delivery__count__${product.id}" class="delivery__count__container">0</div>
-
-  }
-  
-  export function renderCards() {
-    let cards = document.getElementById("cards__list");
-  
-    const cardsForm = document.getElementById("cards__form")
-    cardsForm.addEventListener(
-    "submit",
-    (event) => {
-      const data = new FormData(cardsForm);
-      let output = "";
-      for (const entry of data) {
-        output = `${entry[1]}`
-      }
-      // console.log('form output', output)
-      event.preventDefault();
-      const picked = user.cards.find(card => card.id === output)
-      // console.log('picked', picked)
-      renderCard(picked)
-      document.getElementById('card__Modal').style.display = "none";
-  
-    },
-    false,
-    );
-  
-    const renderCard = (cardData) => {
-      const pickedCard = document.getElementById('card__container')
-      const pickedCardSide = document.getElementById('side__card__container')
-  
-      const rez = `
-      <img src=${cardData.img} alt="">    
-      <div class="centered__flex basic__text">
-        ${bulletCard(cardData.number)}
-      </div>
-      <div class="centered__flex basic__text">
-        ${cardData.expiry__date}
-      </div>
-      `
-  
-      const rezSide = `
-      <img src=${cardData.img} alt="">
-      <div class="centered__flex">
-        ${bulletCard(cardData.number)}
-      </div>`
-  
-      pickedCard.innerHTML = rez
-      pickedCardSide.innerHTML = rezSide
-    }
-  
-  
-    const bulletCard = (num) => {
-      let number = num.toString().split('').map(Number);
-      number.splice(6, 6, '•', '•', '•', '•', '•', '•');
-      const rezult = number.join('').match(/.{1,4}/g).join(' ')
-      return rezult
-    }
-  
-    let rez = user.cards.map( (card, index) => `
-  
-    <div class="check__cardImg">
-      <label class="card__container modal__padding" for=${card.id}>
-        <input type="radio" id=${card.id} name='card' value=${card.id} ${index === 0 ? 'checked' : ''} />
-        <span class="radio__checkmark"></span>
-        <img class="item__image" src="${card.img}" alt="">
-        <span class="item__name">${bulletCard(card.number)}</span>
-      </label>
-    </div>
-  
     `)
-    cards.innerHTML = rez.join('');
+    let rezAdditional = `
+    <div class="delivery__itemImg hide">
+    <div id="additional__delivery__count__container__${products[1].id}" class="delivery__count__box"></div>
+      <img class="item__image" src="${products[1].img__delivery}" alt="" width="40" height="56">
+    </div>
+    `
+    deliveryList.innerHTML = rez.join('');
+    additionalList.innerHTML = rezAdditional;
+
+
+}
+  
+export function genCheckboxName() {
+    return Math.random().toString(16).slice(2)
+}
+
+export function renderDropHeader(mainDropState, totalQtyInCart, totalSummInCart, boxCount) {
+  const dropHeader = document.getElementById("drop__header");
+  if (mainDropState) {
+    dropHeader.innerHTML = `
+    <input onclick="toggleCheckboxes('item__checkbox')" class="checkbox" type="checkbox" id="main__checkbox" ${boxCount === 3 ? 'checked' : ''}/>
+    <label class="checkAll__label">
+      Выбрать все
+    </label>
+  `
+  } else if (!mainDropState) {
+    if (!totalQtyInCart) {
+      totalQtyInCart = 3
+    }
+    console.log(totalSummInCart)
+
+    dropHeader.innerHTML = `
+    <div class="checkAll__label semibold">
+      <span id="total__qty__inCart">${totalQtyInCart}</span>
+      &nbsp;
+      <span>${WordEnding.changeEnding(totalQtyInCart, ['товар', 'товара', 'товаров'])}</span>
+      &nbsp;·&nbsp;
+      <span id="total__cost__inCart">${totalSummInCart ? totalSummInCart.toLocaleString('ru-RU') : ''} сом</span>
+    </div>
+  `
   }
+}
+
+

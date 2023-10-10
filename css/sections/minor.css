@@ -14,12 +14,12 @@ input[type=number] {
     height: fit-content;
     display: flex;
     background: #fff;
-    margin-top: 22px;
+    margin-top: 16px;
     border-radius: 15px;
 }
 
 .white__contentBox {
-    margin: 24px;
+    margin: 16px 24px 24px;
     width: 100%;
 }
 
@@ -50,7 +50,7 @@ input[type=number] {
     line-height: 24px;
     font-size: 16px;
     padding: 0;
-
+    font-family: "Segoe UI";
 }
 
 .text__button {
@@ -70,7 +70,7 @@ input[type=number] {
 .adapt__flex {
     display: flex;
     flex-wrap: nowrap;
-    padding-top: 24px;
+    /* padding-top: 16px; */
 }
 
 .grid__container {
@@ -140,6 +140,7 @@ input[type=number] {
     flex-direction: column-reverse;
     flex: 1;
     position: relative;
+    padding: 10.5px 0px;
 }
 
 .form__label {
@@ -153,13 +154,14 @@ input[type=number] {
     font-size: 16px;
     -webkit-transition: 300ms ease all;
     transition: 300ms ease all;
+    padding: 10.5px 0px;
 }
 
 .input__err {
     position: absolute;
     line-height: 14px;
     font-size: 12px;
-    top: 40px;
+    top: 50px;
     color: #F55123;
 }
 
@@ -188,12 +190,8 @@ input[type=number] {
       font-size: 20px;
     }
 }
-
-  @media only screen and (max-width: 600px) {
-    .adapt__flex {
-        display: flex;
-        flex-direction: column;
-    }
+ 
+@media only screen and (max-width: 1023px) {
     .grid__container {
         display: grid;
         grid-template-columns: auto;
@@ -204,7 +202,7 @@ input[type=number] {
         font-size: 20px;
     }
     .white__contentBox {
-        margin: 22px 16px;
+        margin: 24px 16px;
         width: 100%;
     }
     .white__container {
@@ -212,6 +210,15 @@ input[type=number] {
     }
 }
 
+@media only screen and (max-width: 700px) {
+    .adapt__flex {
+        display: flex;
+        flex-direction: column;
+    }
+    .gap24 {
+        gap: 0px;
+    }
+}
 @media only screen and (min-width: 1400px) {
     .header {
         line-height: 32px;

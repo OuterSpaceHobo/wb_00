@@ -53,7 +53,7 @@ export const products = [
     {
       'id': 'карандаши',
       'name': `Карандаши цветные Faber-Castell &quot;Замок&quot;, набор 24 цвета, заточенные, шестигранные, Faber&ndash;Castell`,
-      'size': '56/54/52/50/48',
+      // 'size': '56/54/52/50/48' // - в прошлых версиях макета был размер
       'img': pencilDesc,
       'img__mobile': pencilMobile,
       'img__delivery': pencilDelivery,

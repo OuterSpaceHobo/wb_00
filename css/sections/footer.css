@@ -34,8 +34,8 @@
   justify-content: center;
   align-items: center;
 }
-    
-@media only screen and (max-width: 600px) {
+     
+@media only screen and (max-width: 1023px) {
     .footer__p {
     }
     .extra__footer__mobile {

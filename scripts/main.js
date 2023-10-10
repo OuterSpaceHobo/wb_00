@@ -1,5 +1,6 @@
 import { products, user } from './data.js'
-import { renderCards, renderCart, renderDelivery, renderUnavaliable } from './render.js';
+import { renderCart, renderDelivery, renderUnavaliable, renderDropHeader } from './render.js';
+import { WordEnding } from './service.js';
 
 // Init
 window.onload = () => {
@@ -9,9 +10,9 @@ window.onload = () => {
     } catch (err) {
       console.log(err)
     } finally {
+      renderDropHeader(false);
       renderCart(cart);
       renderUnavaliable();
-      renderCards();
       renderDelivery();
       addOne(); 
     }
@@ -43,17 +44,24 @@ export function addOne() {
 }
 
 // переменные для селектора
-let qty, deliveryQty, qtyTotal, saleTotal, allTotal, allItems, allDiscounts, checkoutTotal;
-let generalDiscountSumm, personalDiscountSumm;
-let checkoutButton, plusBtn, minusBtn;
+let qty, deliveryQty, additionalDeliveryQty, qtyTotal, saleTotal, allTotal, allItems, allDiscounts, checkoutTotal, totalItemsInCart, totalItemsSummInCart;
+let generalDiscountSumm, personalDiscountSumm, totalQtyInCart, totalSummInCart, additionalQtyContainer, additionalDeliveryDate;
+let checkoutButton, plusBtn, minusBtn, allItemsWord, mainDeliveryDate;
 
 async function selectElements(id) { 
   qty = document.getElementById(`item__qty__${id}`);
   deliveryQty = document.getElementById(`delivery__count__container__${id}`);
+  mainDeliveryDate = document.getElementById(`delivery__date__main`);
+  additionalQtyContainer = document.getElementById(`delivery__list__additional`);
+  additionalDeliveryDate = document.getElementById(`delivery__date__additinal`);
+  additionalDeliveryQty = document.getElementById(`additional__delivery__count__container__${id}`);
   qtyTotal = document.getElementsByName(`item__qty__total__${id}`);
   saleTotal = document.getElementsByName(`item__qty__sale__total__${id}`);
   allTotal = document.getElementById(`side__total__summ`);
   allItems = document.getElementById(`side__total__qty`);
+  allItemsWord = document.getElementById(`side__total__qty__word`);
+  totalItemsInCart = document.getElementById(`total__qty__inCart`);
+  totalItemsSummInCart = document.getElementById(`total__cost__inCart`);
   allDiscounts = document.getElementById(`side__total__discount`);
   checkoutTotal = document.getElementById(`side__checkout__summ`);
   generalDiscountSumm = document.getElementsByName(`item__general__discount__summ__${id}`);
@@ -88,10 +96,24 @@ export async function increment(id) {
 
     // console.log("qty changed here:", qty);
     qty.innerText = toIncrement.count
-    {toIncrement.count > 1 ? 
-      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">${toIncrement.count}</div>`
-      :
+
+    if (toIncrement.count === 1) {
       deliveryQty.innerHTML = ``
+    } 
+    if (toIncrement.count > 1) {
+      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">${toIncrement.count}</div>`
+    } 
+    if (toIncrement.count === 181) {
+      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">180</div>`
+      additionalQtyContainer.style.display = `flex`
+      additionalDeliveryDate.style.display = `flex`
+      additionalDeliveryQty.innerHTML = ``
+      mainDeliveryDate.innerText = `5–8 фев`
+    }
+    if (toIncrement.count > 181) {
+      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">180</div>`
+      additionalDeliveryQty.style.display = `flex`
+      additionalDeliveryQty.innerHTML = `<div id="additional__delivery__count__${id}" class="delivery__count__container">${toIncrement.count - 180}</div>`
     }
 
     let qtyTotalArray = Array.from(qtyTotal)
@@ -102,10 +124,23 @@ export async function increment(id) {
     const discSummRez = toDiscSumm.reduce(function (acc, obj) { return acc + obj.discSumm; }, 0);
     allTotal.innerText = discSummRez.toLocaleString('ru-RU')
 
+    //всего кол-во товаров в корзине
+    totalQtyInCart = cart.reduce(function (acc, obj) { return acc + obj.count; }, 0);
+    if (totalItemsInCart) {
+      totalItemsInCart.innerText = totalQtyInCart
+    }
+
+    //всего сумма товаров в корзине
+    totalSummInCart = cart.reduce(function (acc, obj) { return acc + obj.discSumm; }, 0);
+    if (totalItemsSummInCart) {
+      totalItemsSummInCart.innerText = `${totalSummInCart.toLocaleString('ru-RU')} сом`
+    }
+
     //общее кол-во под один id
     const allQty = cart.filter(item => item.checked === true)
     const allQtyRez = allQty.reduce(function (acc, obj) { return acc + obj.count; }, 0);
     allItems.innerText = allQtyRez
+    allItemsWord.innerHTML = `&nbsp;${WordEnding.changeEnding(totalQtyInCart, ['товар', 'товара', 'товаров'])}`
 
     //скидка отдельно по товарам
     let saleTotalArray = Array.from(saleTotal)
@@ -184,10 +219,27 @@ function decrement(id) {
 
     // console.log('количество', +toDecrement.count)
     qty.innerText = toDecrement.count
-    {toDecrement.count > 1 ? 
-      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">${toDecrement.count}</div>`
-      :
+
+    if (toDecrement.count === 1) {
       deliveryQty.innerHTML = ``
+    } 
+    if (toDecrement.count > 1) {
+      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">${toDecrement.count}</div>`
+    } 
+    if (toDecrement.count > 181) {
+      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">180</div>`
+      additionalDeliveryQty.innerHTML = `<div id="additional__delivery__count__${id}" class="delivery__count__container">${toDecrement.count - 180}</div>`
+    }
+    if (toDecrement.count === 181) {
+      additionalQtyContainer.style.display = `flex`
+      additionalDeliveryDate.style.display = `flex`
+      deliveryQty.innerHTML = `<div id="delivery__count__${id}" class="delivery__count__container">180</div>`
+      additionalDeliveryQty.innerHTML = ``
+    }
+    if (toDecrement.count < 181) {
+      additionalQtyContainer.style.display = `none`
+      additionalDeliveryDate.style.display = `none`
+      mainDeliveryDate.innerText = `5–6 фев`
     }
       
     // console.log("qty changed here:", qty);
@@ -199,11 +251,24 @@ function decrement(id) {
     const discSummRez = toDiscSumm.reduce(function (acc, obj) { return acc + obj.discSumm; }, 0);
     allTotal.innerText = discSummRez.toLocaleString('ru-RU')
 
+    //всего кол-во товаров в корзине
+    totalQtyInCart = cart.reduce(function (acc, obj) { return acc + obj.count; }, 0);
+    if (totalItemsInCart) {
+      totalItemsInCart.innerText = totalQtyInCart
+    }
+    
+    //всего сумма товаров в корзине
+    totalSummInCart = cart.reduce(function (acc, obj) { return acc + obj.discSumm; }, 0);
+    if (totalItemsSummInCart) {
+      totalItemsSummInCart.innerText = totalSummInCart
+    }
+
     // общее кол-во под один id
     const allQty = cart.filter(item => item.checked === true)
     const allQtyRez = allQty.reduce(function (acc, obj) { return acc + obj.count; }, 0);
     allItems.innerText = allQtyRez
-    
+    allItemsWord.innerHTML = `&nbsp;${WordEnding.changeEnding(totalQtyInCart, ['товар', 'товара', 'товаров'])}`
+
     //скидка отдельно по товарам
     let saleTotalArray = Array.from(saleTotal)
     saleTotalArray.map(tot => tot.innerText = `${itemsDiscount.toLocaleString('ru-RU')} `)
@@ -251,13 +316,25 @@ function decrement(id) {
 window.decrement = decrement
 
 // Toggle & checks
+let isAllCheck = true;
+let boxCount = 3;
 
 export function toggleDropdown(event) {
   event.preventDefault();
-  document.getElementById("myDropdown").classList.toggle("show");
   document.getElementById("rotate").classList.toggle("rotated");
+  const mainDrop = document.getElementById("myDropdown")
+  mainDrop.classList.toggle("show");
+  let mainDropState = mainDrop.classList.contains("show")
+  renderDropHeader(mainDropState, totalQtyInCart, totalSummInCart, boxCount)
 }
 window.toggleDropdown = toggleDropdown
+
+export function toggleFavorites(id, event) {
+  event.preventDefault();
+  const heart = document.querySelectorAll(`#cart__heart__${id}`)
+  heart.forEach(heart => heart.classList.toggle("favorite"))
+}
+window.toggleFavorites = toggleFavorites
 
 function toggleDropdownNotAvaliable(event) {
   event.preventDefault();
@@ -283,26 +360,25 @@ function togglePayment() {
 }
 window.togglePayment = togglePayment
 
-
-let isAllCheck = true;
-let boxCount = 0;
-
 function toggleCheckboxes(cn){
-    let cbarray = document.getElementsByName(cn);
-    for(let i = 0; i < cbarray.length; i++){
-        cbarray[i].checked = !isAllCheck
-    }   
-  isAllCheck = !isAllCheck;   
-  { isAllCheck ? boxCount = 3 : boxCount = 0 }
+  const mainCheckbox = document.querySelectorAll('#main__checkbox');
+  const maincheckState = mainCheckbox[0].checked
+  const allChecks = document.querySelectorAll('[id^="item__checkbox__"]');
+
+  { maincheckState ? (boxCount = 3) : (boxCount = 0) }
+  allChecks.forEach(check => check.checked = maincheckState)
+
   const counter = document.getElementById("cart__pos__count");
   counter.innerText = boxCount
+
   const footerCounter = document.getElementById("footer__cart__pos__count");
   if (footerCounter) {
     footerCounter.innerText = boxCount
   }
 
-  cart.forEach(item => item.checked = !item.checked)
-  // console.log('cart', cart)
+  // cart.forEach(item => item.checked = !item.checked) // bug
+  cart.forEach(item => item.checked !== maincheckState ? item.checked = !item.checked : '') // bugfix
+  console.log('cart', cart)
 
   const toSumm = cart.filter(item => item.checked === true)
   const summRez = toSumm.reduce(function (acc, obj) { return acc + obj.summ; }, 0);
@@ -325,18 +401,20 @@ function toggleCheckboxes(cn){
   const allQty = cart.filter(item => item.checked === true)
   const allQtyRez = allQty.reduce(function (acc, obj) { return acc + obj.count; }, 0);
   allItems.innerText = allQtyRez
+  allItemsWord.innerHTML = `&nbsp;${WordEnding.changeEnding(allQtyRez, ['товар', 'товара', 'товаров'])}`
 }
 window.toggleCheckboxes = toggleCheckboxes
 
 
-function singleInputToggle(event, id) {
+function singleInputToggle(event, id, name) {
   event.stopImmediatePropagation()
-  console.log('id', id)
 
-  let cbarray = document.getElementsByName('item__checkbox');
-  const arr = Array.from(cbarray)
-  const rez = arr.filter((ch) => ch.checked === true )
-  boxCount = rez.length
+  let chName = document.querySelectorAll(`[name="${name}"]`);
+  const checkState = chName[0].checked
+  let cbarray = document.querySelectorAll(`#item__checkbox__${id}`);
+
+  cbarray.forEach((ch) => ch.checked = checkState)
+  { checkState ? ++boxCount : --boxCount }
 
   const counter = document.getElementById("cart__pos__count");
   counter.innerText = boxCount
@@ -345,14 +423,15 @@ function singleInputToggle(event, id) {
   if (footerCounter) {
     footerCounter.innerText = boxCount
   }
-  if (rez.length < 3 ) {
+
+  if (boxCount < 3 ) {
     isAllCheck = false
     document.getElementById("main__checkbox").checked = isAllCheck
-  } else if (rez.length === 3) {
+  } else if (boxCount === 3) {
     isAllCheck = true
     document.getElementById("main__checkbox").checked = isAllCheck
   }
-
+ 
   const toCheck = cart.find(item => item.id === id)
   toCheck.checked = !toCheck.checked
   // console.log('cart', cart)
@@ -367,6 +446,17 @@ function singleInputToggle(event, id) {
     checkoutButton.innerText = orderSumm;
   }
 
+  // const additionalQtyContainer = document.getElementById(`delivery__list__additional`);
+  // const additionalDeliveryDate = document.getElementById(`delivery__date__additinal`);
+  // if (id === `чехол` && cbarray[0].checked === false) {
+  //   additionalQtyContainer.style.display = `none`
+  //   additionalDeliveryDate.style.display = `none`
+  // }
+  // if (id === `чехол` && cbarray[0].checked === true) {
+  //   additionalQtyContainer.style.display = `flex`
+  //   additionalDeliveryDate.style.display = `flex`
+  // }
+
   const toDiscSumm = cart.filter(item => item.checked === true)
   const discSummRez = toDiscSumm.reduce(function (acc, obj) { return acc + obj.discSumm; }, 0);
   allTotal.innerText = discSummRez.toLocaleString('ru-RU')
@@ -378,6 +468,6 @@ function singleInputToggle(event, id) {
   const allQty = cart.filter(item => item.checked === true)
   const allQtyRez = allQty.reduce(function (acc, obj) { return acc + obj.count; }, 0);
   allItems.innerText = allQtyRez
+  allItemsWord.innerHTML = `&nbsp;${WordEnding.changeEnding(allQtyRez, ['товар', 'товара', 'товаров'])}`
 }
 window.singleInputToggle = singleInputToggle
-

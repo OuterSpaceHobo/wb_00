@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Vite App</title>
@@ -67,7 +66,7 @@
               style="position: absolute; top: -2px;; left: 0px;"
               src="assets/header/Vector.svg" alt="">
               <div class="cart__count__container" id="cart__pos__count">
-                0
+                3
               </div>
             </div>
           </div>
@@ -88,12 +87,7 @@
           <!-- присутствуют -->
           <div class="dropdown">
             <div name="drop__underline" class="drop__container">
-              <div class="checkAll__container">
-                <input onclick="toggleCheckboxes('item__checkbox')" class="checkbox" type="checkbox" id="main__checkbox" checked/>
-                <label class="checkAll__label">
-                  Выбрать все
-                </label>
-              </div>
+              <div class="checkAll__container" id="drop__header"></div>
               <button type="button" onclick="toggleDropdown(event)" class="dropbtn">
                 <img id="rotate" class="header__arrow" src="assets/cart_view/Vector (5).svg" alt="">
               </button>
@@ -125,7 +119,7 @@
           </div>
 
           <!-- способ доставки -->
-          <div class="white__container">
+          <div class="white__container" id="delivery__top">
             <div class="white__contentBox">
               <div class="white__headerBox">
                 <span class="header">Cпособ доставки</span>
@@ -198,6 +192,8 @@
                   <span class="grid__item delivery__gap">Бесплатно</span>
                   <span class="grid__item semibold">5—6 февраля</span>
                   <div class="delivery__list" id="delivery__list"></div>
+                  <span class="grid__item semibold hide" id="delivery__date__additinal">7—8 февраля</span>
+                  <div class="delivery__list" id="delivery__list__additional"></div>
               </div>
 
               <div class="white__footerBox">
@@ -247,7 +243,9 @@
                 </div>
               </div>
 
-              <div class="card__container" id="card__container">
+              <div               
+              style="margin-bottom: 8px"
+              class="card__container" id="card__container">
                   <img src="assets/cards/mir.svg" alt="">    
                 <div class="centered__flex basic__text">
                   1234 56•• •••• 1234
@@ -257,7 +255,9 @@
                 </div>
               </div>
 
-              <span class="return__text gray" id="payment__checked">Спишем оплату с карты при получении</span>
+              <span 
+              class="return__text gray" 
+              id="payment__checked">Спишем оплату с карты при получении</span>
 
             </div>
           </div>
@@ -325,10 +325,14 @@
                   <div class="form__flex">
                     <input 
                       onfocusout="validatePhone()"
+                      oninput="formatPhoneNumber(this, event)"
                       value=""
                       onkeyup="this.setAttribute('value', this.value);"
                       class="buyer__input basic__text" 
                       type="tel" 
+                      inputmode="numeric"
+                      pattern="^[0-9+\s]+$"
+                      maxlength="30"
                       required
                       placeholder=""
                       id="phone" 
@@ -369,14 +373,14 @@
           <ul class="total__ul">
             <li 
             class="total__li"
-            style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">
+            id="total__first">
               <span class="total__li__start">Итого</span>
               <span id="side__checkout__summ" class="total__li__end">0</span>
               <span style="display: flex; font-size: 20px; font-weight: 700;">&nbsp;сом</span>
             </li>
             <li class="total__li">
               <span id="side__total__qty">0</span>
-              <span class="total__li__start">&nbsp;товара</span>
+              <span id ="side__total__qty__word" class="total__li__start">&nbsp;товара</span>
               <span class="total__li__end" id="side__total__summ">0</span>
               <span  class="total__li__end">&nbsp;сом</span>
             </li>
@@ -400,11 +404,11 @@
               onclick="toggleAddressesModal(event)"
               class="edit__btn"
               style="margin-left: auto;">
-                <img src="assets/cart_total/Vector (3).svg" alt="">
+                <img src="public/cart_total/Vector_(3).svg" alt="">
               </button>
             </div>
             <span class="delivery__adress">Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</span>
-            <span class="delivery__date">5–8 фев</span>
+            <span id="delivery__date__main" class="delivery__date">5–6 фев</span>
           </div>
 
           <div class="return__container">
@@ -418,21 +422,25 @@
           </div>
 
           <div class="payment__container">
-            <div class="total__header">
-              <span>Оплата картой</span>
-              <button 
-              onclick="toggleCardModal(event)"
-              class="edit__btn"
-              style="margin-left: auto;">
-                <img src="assets/cart_total/Vector (3).svg" alt="">
-              </button>
-            </div>
-            <div class="card__container" id="side__card__container">
-                <img src="assets/cards/mir.svg" alt="">
-              <div class="centered__flex">
-                1234 12•• •••• 1234
+            <div class="payment__option">
+              <div class="total__header">
+                <span>Оплата картой</span>
+                <button 
+                onclick="toggleCardModal(event)"
+                class="edit__btn"
+                style="margin-left: auto;">
+                  <img src="public/cart_total/Vector_(3).svg" alt="">
+                </button>
+              </div>
+              <div class="card__container" id="side__card__container">
+                  <img src="assets/cards/mir.svg" alt="">
+                <div class="centered__flex">
+                  1234 12•• •••• 1234
+                </div>
               </div>
             </div>
+
+
             <div class="payment__time">
               <div class="payment__label">
                 <input class="checkbox" type="checkbox" name="peas" onclick="togglePayment()" />
@@ -477,7 +485,7 @@
           style="left: 65%; bottom: 20px; top: -5px;"
           class="cart__count__container" 
           id="footer__cart__pos__count">
-            0
+            3
           </div>
         </div>
       </div>
@@ -489,26 +497,6 @@
         <img src="assets/mobile/profile.svg" alt="">
       </div>
     </div>
-
-    <!-- <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyB_SCQ3188blvcqqNm3wnVtSxhjPhcW8ek",
-        authDomain: "wb-test-task-0.firebaseapp.com",
-        projectId: "wb-test-task-0",
-        storageBucket: "wb-test-task-0.appspot.com",
-        messagingSenderId: "601784311742",
-        appId: "1:601784311742:web:b75336a9950d9642a8e3ef"
-      };
-    
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-    </script> -->
 
   </body>
 </html>

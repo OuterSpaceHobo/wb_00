@@ -8,8 +8,7 @@
 @import url("sections/cards__modal.css");
 @import url("sections/addresses__modal.css");
 @import url("sections/delivery.css");
-
-
+@import url("sections/form.css");
 
 body {
   margin: 0;

@@ -90,15 +90,14 @@
     min-height: 25px;
     width: 100%;
     display: flex;
-    /* align-items: center; */
     padding-left: 28px;
 }
 
 .modal__w500 {
     width: 500px;
 }
-
-@media only screen and (max-width: 600px) {
+ 
+@media only screen and (max-width: 1023px) {
     .modal__w500 {
         width: 100vw;
     }

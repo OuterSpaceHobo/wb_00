@@ -89,27 +89,42 @@ function validateEmail(){
 window.validateEmail = validateEmail
 
 
-function validatePhone(){
+async function validatePhone(){
   let x = document.getElementById("phone").value;
+  // const reg = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
+  const reg = /^(?=.{3,16}$)\+(\d{1}[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{15}$/
   let elem = document.getElementById("phone");
-  const reg = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
+
   if ( x === '' && !checkOut ) {
     return null
   } else if (!x && checkOut) {
     validationErr("phone", "phone__err", "phone__label")
-    document.getElementById("phone").oninput = validatePhone
+    document.getElementById("phone").onkeyup = validatePhone
     elem.scrollIntoView()
   } else if (!reg.test(x)) {
     validationErr("phone", "phone__err", "phone__label")
-    document.getElementById("phone").oninput = validatePhone
+    document.getElementById("phone").onkeyup = validatePhone
   } else {
     console.log('reseting')
     inputStyleReset("phone", "phone__err", "phone__label")
-    document.getElementById("phone").oninput = ''
   }
 }
 window.validatePhone = validatePhone
 
+function formatPhoneNumber(input, event) {
+  let value = input.value.replace(/[^0-9+\s\+]/g, '');
+  const length = input.value.length
+
+  if (
+    (length === 2 || length === 6 || length === 10 || length === 13) 
+    && 
+    event.inputType !== 'deleteContentBackward') {
+    // console.log('adding space')
+    value = value + ' '
+  } 
+  input.value = value
+}
+window.formatPhoneNumber = formatPhoneNumber
 
 function validateInn(){
   let x = document.getElementById("inn").value;
@@ -152,3 +167,5 @@ function inputStyleReset(id, errId, labelId) {
   document.getElementById(errId).innerHTML = "";
 }
 window.inputStyleReset = inputStyleReset
+
+

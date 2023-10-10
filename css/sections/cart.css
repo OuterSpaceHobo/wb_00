@@ -72,7 +72,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    margin-top: 12px;
     gap: 32px;
 }
 
@@ -114,9 +114,8 @@
 }
 
 .item__container:hover  .qty__item__icons{
-   display: flex; 
-}
-
+   /* display: flex;  */
+   visibility: visible;}
 
 .item__description {
     display: flex;
@@ -168,7 +167,6 @@
 	padding: 0;
 	border: 0;
     padding-bottom: 8px;
-
 }
 
 .item__additional {
@@ -189,8 +187,6 @@
 .item__col__size {
     display: flex;
     gap: 16px;
-    /* margin-top: 8px;
-    margin-bottom: 8px; */
 }
 
 .item__seller__info {
@@ -205,6 +201,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    height: 96px;
 }
 
 .item__qty__container {
@@ -219,7 +216,9 @@
 }
 
 .qty__item__icons {
-    display: none;
+    display: flex; 
+    visibility: hidden;
+    /* display: none; */
     margin-top: 4px;
     gap: 18px;
     flex: 1;
@@ -309,7 +308,7 @@
     display: flex;
     align-items: baseline;
     background: url("../../assets/general/buck_black.svg") no-repeat;
-}
+}x
 
 .cart__bucket__button:hover {
     background: url("../../assets/general/icon-20 (3) copy.svg") no-repeat;
@@ -327,6 +326,11 @@
 }
 
 .cart__heart__button:hover {
+    background: url("../../assets/general/heart_hover.svg") no-repeat;
+}
+
+.favorite {
+    visibility: visible;
     background: url("../../assets/general/heart_hover.svg") no-repeat;
 }
 
@@ -351,8 +355,8 @@
     display: flex;
     gap: 8px;
 }
-
-@media only screen and (max-width: 600px) {
+ 
+@media only screen and (max-width: 1023px) {
     .dropdown {
     }
     .drop__container {
@@ -403,6 +407,7 @@
     }
     .item__price__container__mobile {
         display: flex;
+        /* margin-top: 4px; */
     }
     .item__seller__info {
         display: none;
@@ -418,6 +423,7 @@
     .item__description {
         max-width: fit-content;
         margin-top: 5px;
+        gap: 3px;
     }
     .item__container {
         flex-direction: column;
